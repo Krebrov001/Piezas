@@ -39,9 +39,7 @@ TEST(PiezasTest, test_constructor)
         }
     }
 
-    /*
     // When I drop the piece, it should be piece X.
     Piece piece = game.dropPiece(0);
     ASSERT_EQ(piece, X);
-    */
 }

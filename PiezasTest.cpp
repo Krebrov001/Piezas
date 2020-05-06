@@ -29,7 +29,6 @@ TEST(PiezasTest, test_constructor)
 
     Piezas game;
 
-    /*
     // The constructor sets an empty board, which means that all the spaces have to be blank.
     // They cannot contain any garbage values.
     // This for loop is only one of the few places where we need to violate the one assert rule.
@@ -40,6 +39,7 @@ TEST(PiezasTest, test_constructor)
         }
     }
 
+    /*
     // When I drop the piece, it should be piece X.
     Piece piece = game.dropPiece(0);
     ASSERT_EQ(piece, X);

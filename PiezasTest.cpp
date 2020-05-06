@@ -24,12 +24,12 @@ TEST(PiezasTest, sanityCheck)
 
 TEST(PiezasTest, test_constructor)
 {
-    /*
     const int num_rows = 3;
     const int num_cols = 4;
 
     Piezas game;
 
+    /*
     // The constructor sets an empty board, which means that all the spaces have to be blank.
     // They cannot contain any garbage values.
     // This for loop is only one of the few places where we need to violate the one assert rule.

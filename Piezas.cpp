@@ -1,6 +1,5 @@
 #include "Piezas.h"
 #include <vector>
-#include <iostream>
 
 /** CLASS Piezas
  * Class for representing a Piezas vertical board, which is roughly based
@@ -84,7 +83,7 @@ Piece Piezas::dropPiece(int column)
                 found_location = false;
                 break;
             // If previous space is occupied && current space is free
-            } else if (board[row - 1][column] != Blank && board[row][column] == Blank) {
+            } else if (row > 0 && board[row - 1][column] != Blank && board[row][column] == Blank) {
                 found_location = true;
                 break;
             // If row == 0 && current space is free
@@ -95,8 +94,6 @@ Piece Piezas::dropPiece(int column)
         }
 
         if (found_location) {
-            std::cout << "row = " << row << std::endl;
-            std::cout << "col = " << column << std::endl;
             board[row][column] = turn;
             piece = board[row][column];
         } else {

@@ -96,7 +96,7 @@ Piece Piezas::dropPiece(int column)
 
         if (found_location) {
             std::cout << "row = " << row << std::endl;
-            std::cout << "col = " << column << stD::endl;
+            std::cout << "col = " << column << std::endl;
             board[row][column] = turn;
             piece = board[row][column];
         } else {

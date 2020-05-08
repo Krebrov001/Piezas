@@ -21,7 +21,7 @@ TEST(PiezasTest, sanityCheck)
 }
 
 
-TEST(PiezasTest, test_constructor_1)
+TEST(PiezasTest, constructor_1)
 {
     // This test checks if the constructor sets up the memory for the map correctly.
     Piezas game;
@@ -38,7 +38,7 @@ TEST(PiezasTest, test_constructor_1)
 }
 
 
-TEST(PiezasTest, test_constructor_2)
+TEST(PiezasTest, constructor_2)
 {
     // This test checks if the constructor sets X as the first player.
     Piezas game;
@@ -49,7 +49,7 @@ TEST(PiezasTest, test_constructor_2)
 }
 
 
-TEST(PiezasTest, test_reset_empty)
+TEST(PiezasTest, reset_empty)
 {
     // This test checks if Piezas::reset() clears the memory correctly,
     // having an already empty board.
@@ -67,7 +67,7 @@ TEST(PiezasTest, test_reset_empty)
 }
 
 
-TEST(PiezasTest, test_reset_partial)
+TEST(PiezasTest, reset_partial)
 {
     // This test checks if Piezas::reset() clears the memory correctly,
     // having a partially occupied board.
@@ -98,7 +98,7 @@ TEST(PiezasTest, test_reset_partial)
 }
 
 
-TEST(PiezasTest, test_reset_full)
+TEST(PiezasTest, reset_full)
 {
     // This test checks if Piezas::reset() clears the memory correctly,
     // having a completely full board with pieces.
@@ -124,7 +124,7 @@ TEST(PiezasTest, test_reset_full)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_1)
+TEST(PiezasTest, pieceAt_Invalid_1)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having the column
     // out of bounds to the negative.
@@ -135,7 +135,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_1)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_2)
+TEST(PiezasTest, pieceAt_Invalid_2)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having the column
     // out of bounds to the positive.
@@ -146,7 +146,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_2)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_3)
+TEST(PiezasTest, pieceAt_Invalid_3)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having the row
     // out of bounds to the negative.
@@ -157,7 +157,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_3)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_4)
+TEST(PiezasTest, pieceAt_Invalid_4)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having the row
     // out of bounds to the positive.
@@ -168,7 +168,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_4)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_5)
+TEST(PiezasTest, pieceAt_Invalid_5)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
     // the row out of bounds to the negative AND the column out of bounds to the negative
@@ -179,7 +179,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_5)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_6)
+TEST(PiezasTest, pieceAt_Invalid_6)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
     // the row out of bounds to the negative AND the column out of bounds to the positive
@@ -190,7 +190,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_6)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_7)
+TEST(PiezasTest, pieceAt_Invalid_7)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
     // the row out of bounds to the positive AND the column out of bounds to the negative
@@ -201,7 +201,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_7)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_8)
+TEST(PiezasTest, pieceAt_Invalid_8)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
     // the row out of bounds to the positive AND the column out of bounds to the positive
@@ -209,4 +209,36 @@ TEST(PiezasTest, test_pieceAt_Invalid_8)
 
     Piece piece = game.pieceAt(BOARD_ROWS, BOARD_COLS);
     ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, first_dropPiece_succeeds)
+{
+    // This test checks if after you drop a piece into an empty collumn,
+    // that piece falls down to the bottom of the column and that the memory is indeed modified.
+    Piezas game;
+
+    game.dropPiece(1);
+
+    Piece piece == game.pieceAt(0, 1);
+    ASSERT_EQ(piece, X);
+}
+
+
+TEST(PiezasTest, first_dropPiece_no_footprints)
+{
+    // This test checks if after you drop a piece into an empty collumn,
+    // that piece falls down to the bottom of the column and that it doesn't corrupt all the other
+    // cells in that collumn. It is possible for a bad implementation to leave "footprints" in
+    // the memory, where all the cells in that collumn will have the value of that piece.
+    // It would just blindly assign every cell in that column to have that piece value.
+    Piezas game;
+
+    game.dropPiece(1);
+
+    Piece piece == game.pieceAt(1, 1);
+    ASSERT_EQ(piece, Blank);
+
+    Piece piece == game.pieceAt(2, 1);
+    ASSERT_EQ(piece, Blank);
 }

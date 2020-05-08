@@ -370,6 +370,6 @@ TEST(PiezasTest, second_dropPiece_goes_above)
 
     Piece piece = game.dropPiece(0, 2);
     ASSERT_EQ(piece, X);
-    Piece piece = game.dropPiece(1, 2);
+    piece = game.dropPiece(1, 2);
     ASSERT_EQ(piece, O);
 }

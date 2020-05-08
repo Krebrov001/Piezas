@@ -357,3 +357,19 @@ TEST(PiezasTest, third_dropPiece_switches_plyaer)
     Piece piece = game.dropPiece(0);
     ASSERT_EQ(piece, X);
 }
+
+
+TEST(PiezasTest, second_dropPiece_goes_above)
+{
+    // This test checks that a second dropPiece() actually places the second piece in the cell above
+    // the first one, and not for instance in the same grid location, overwriting the first one.
+    Piezas game;
+
+    game.dropPiece(2);  // places X
+    game.dropPiece(2);  // places O
+
+    Piece piece = game.dropPiece(0, 2);
+    ASSERT_EQ(piece, X);
+    Piece piece = game.dropPiece(1, 2);
+    ASSERT_EQ(piece, O);
+}

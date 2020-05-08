@@ -439,3 +439,22 @@ TEST(PiezasTest, dropPiece_Invalid_5)
     returned = game.dropPiece(2);
     ASSERT_EQ(returned, turn);
 }
+
+
+TEST(PiezasTest, gameState_Blank_edges)
+{
+    // This test checks if Piezas::gameState() correctly deals with blank edges.
+    // The whole entire board is filled except for the last column and the last row.
+    // This test should detect if there is an off by one error.
+    Piezas game;
+
+    game.dropPiece(0);  // drop X into [0][0]
+    game.dropPiece(1);  // drop O into [0][1]
+    game.dropPiece(2);  // drop X into [0][2]
+    game.dropPiece(0);  // drop O into [1][0]
+    game.dropPiece(1);  // drop X into [1][1]
+    game.dropPiece(2);  // drop O into [1][2]
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, Invalid);
+}

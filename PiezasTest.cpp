@@ -146,6 +146,28 @@ TEST(PiezasTest, dropPiece_Invalid_2)
 }
 
 
+TEST(PiezasTest, dropPiece_Invalid_3)
+{
+    // This test checks if Piezas::dropPiece() returns Invalid upon having the column
+    // out of bounds to the negative.
+    Piezas game;
+
+    Piece piece = game.dropPiece(-10);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, dropPiece_Invalid_4)
+{
+    // This test checks if Piezas::dropPiece() returns Invalid upon having the column
+    // out of bounds to the positive.
+    Piezas game;
+
+    Piece piece = game.dropPiece(BOARD_COLS + 10);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
 TEST(PiezasTest, pieceAt_Invalid_1)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having the column

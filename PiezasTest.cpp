@@ -375,14 +375,34 @@ TEST(PiezasTest, second_dropPiece_goes_above)
 }
 
 
-TEST(PiezasTest, dropPiece_fill_whole_collumn)
+TEST(PiezasTest, dropPiece_Blank_1)
 {
-    // This test checks if we are able to successfully fill the whole column using dropPiece().
+    // This test checks if a user wanted to drop a piece into a full column, it should return blank.
     Piezas game;
 
     for (int row = 0; row < BOARD_ROWS; ++row) {
         game.dropPiece(BOARD_COLS - 1);  // a valid grid loaction
     }
+
+    // Attempts to drop a piece into a full collumn.
+    Piece piece = game.dropPiece(BOARD_COLS - 1);
+    ASSERT_EQ(piece, Blank);
+}
+
+
+TEST(PiezasTest, dropPiece_Blank_2)
+{
+    // This test checks if we are able to successfully fill the whole column using dropPiece().
+    // If a user wanted to drop a piece into a full column, the memory contents of the board should
+    // not change.
+    Piezas game;
+
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        game.dropPiece(BOARD_COLS - 1);  // a valid grid loaction
+    }
+
+    // Attempts to drop a piece into a full collumn.
+    game.dropPiece(BOARD_COLS - 1);
 
     Piece actual_piece = Blank;
     Piece theoretical_piece = X;

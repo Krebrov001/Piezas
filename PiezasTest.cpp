@@ -330,3 +330,30 @@ TEST(PiezasTest, first_dropPiece_no_footprints)
     piece = game.pieceAt(2, 1);
     ASSERT_EQ(piece, Blank);
 }
+
+
+TEST(PiezasTest, second_dropPiece_switches_plyaer)
+{
+    // This test checks that dropPiece() switches to O after an X is dropped.
+    Piezas game;
+
+    game.dropPiece(0);  // places X
+
+    // When I drop the piece, it should be piece O.
+    Piece piece = game.dropPiece(0);
+    ASSERT_EQ(piece, O);
+}
+
+
+TEST(PiezasTest, third_dropPiece_switches_plyaer)
+{
+    // This test checks that dropPiece() switches to X after an O is dropped.
+    Piezas game;
+
+    game.dropPiece(0);  // places X
+    game.dropPiece(0);  // places O
+
+    // When I drop the piece, it should be piece X.
+    Piece piece = game.dropPiece(0);
+    ASSERT_EQ(piece, X);
+}

@@ -368,8 +368,8 @@ TEST(PiezasTest, second_dropPiece_goes_above)
     game.dropPiece(2);  // places X
     game.dropPiece(2);  // places O
 
-    Piece piece = game.dropPiece(0, 2);
+    Piece piece = game.pieceAt(0, 2);
     ASSERT_EQ(piece, X);
-    piece = game.dropPiece(1, 2);
+    piece = game.pieceAt(1, 2);
     ASSERT_EQ(piece, O);
 }

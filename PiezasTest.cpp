@@ -601,7 +601,7 @@ TEST(PiezasTest, gameState_win_column)
     game.dropPiece(1);  // drop O into [1][1]
     game.dropPiece(3);  // drop X into [1][3]
     game.dropPiece(3);  // drop O into [2][3]
-    gmae.dropPiece(0);  // drop X into [2][0]
+    game.dropPiece(0);  // drop X into [2][0]
     game.dropPiece(1);  // drop O into [2][1]
 
     Piece winner = game.gameState();

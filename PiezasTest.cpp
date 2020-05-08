@@ -216,11 +216,11 @@ TEST(PiezasTest, first_dropPiece_succeeds)
 {
     // This test checks if after you drop a piece into an empty collumn,
     // that piece falls down to the bottom of the column and that the memory is indeed modified.
-    Piezas game;
+    git Piezas game;
 
     game.dropPiece(1);
 
-    Piece piece == game.pieceAt(0, 1);
+    Piece piece = game.pieceAt(0, 1);
     ASSERT_EQ(piece, X);
 }
 
@@ -236,9 +236,9 @@ TEST(PiezasTest, first_dropPiece_no_footprints)
 
     game.dropPiece(1);
 
-    Piece piece == game.pieceAt(1, 1);
+    Piece piece = game.pieceAt(1, 1);
     ASSERT_EQ(piece, Blank);
 
-    Piece piece == game.pieceAt(2, 1);
+    piece = game.pieceAt(2, 1);
     ASSERT_EQ(piece, Blank);
 }

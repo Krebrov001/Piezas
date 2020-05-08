@@ -201,7 +201,7 @@ TEST(PiezasTest, test_pieceAt_Invalid_7)
 }
 
 
-TEST(PiezasTest, test_pieceAt_Invalid_7)
+TEST(PiezasTest, test_pieceAt_Invalid_8)
 {
     // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
     // the row out of bounds to the positive AND the column out of bounds to the positive

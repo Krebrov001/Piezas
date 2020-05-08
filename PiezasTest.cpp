@@ -96,3 +96,29 @@ TEST(PiezasTest, test_reset_partial)
         }
     }
 }
+
+
+TEST(PiezasTest, test_reset_full)
+{
+    // This test checks if Piezas::reset() clears the memory correctly,
+    // having a completely full board with pieces.
+    Piezas game;
+
+    // Fill up the entire board with pieces.
+    // game::reset() needs to clear the entire board.
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
+            game.dropPiece(col);
+        }
+    }
+    game.reset();
+
+    // reset should make all the pieces blank again
+    // This for loop is only one of the few places where we need to violate the one assert rule.
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
+            Piece piece = game.pieceAt(row, col);
+            ASSERT_EQ(piece, Blank);
+        }
+    }
+}

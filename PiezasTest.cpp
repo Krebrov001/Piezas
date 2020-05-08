@@ -632,3 +632,33 @@ TEST(PiezasTest, gameState_win_tie_breaker)
     Piece winner = game.gameState();
     ASSERT_EQ(winner, O);
 }
+
+
+TEST(PiezasTest, gameState_win_iterative_improvement)
+{
+    // This test checks if Piezas::gameState() correctly deals with an iterative improvement.
+    // First the longest consecutive sequence is 2, then 3, then 4.
+    Piezas game;
+
+    game.dropPiece(0);  // drop X into [0][0]
+    game.dropPiece(1);  // drop O into [0][1]
+    game.dropPiece(3);  // drop X into [0][3]
+    game.dropPiece(2);  // drop O into [0][2]
+    game.dropPiece(3);  // drop X into [1][3]
+    game.dropPiece(0);  // drop O into [1][0]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(1);  // drop O into [1][1]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(2);  // drop O into [1][2]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(0);  // drop O into [2][0]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(1);  // drop O into [2][1]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(2);  // drop O into [2][2]
+    game.dropPiece(-5);  // drop X into Invalid
+    game.dropPiece(3);  // drop O into [2][3]
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, O);
+}

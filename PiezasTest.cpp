@@ -460,7 +460,7 @@ TEST(PiezasTest, gameState_Blank_edges)
 }
 
 
-TEST(Piezas, gameState_tie_1)
+TEST(PiezasTest, gameState_tie_1)
 {
     // This test checks if Piezas::gameState() correctly deals with ties when the maximum
     // continuous sequences for each player have a length of 1 only.

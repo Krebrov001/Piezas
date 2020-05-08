@@ -378,15 +378,22 @@ TEST(PiezasTest, second_dropPiece_goes_above)
 TEST(PiezasTest, dropPiece_Blank_1)
 {
     // This test checks if a user wanted to drop a piece into a full column, it should return blank.
+    // Then that player loses their turn.
     Piezas game;
 
-    for (int row = 0; row < BOARD_ROWS; ++row) {
+    Piece turn = X;
+
+    for (int row = 0; row < BOARD_ROWS; ++row, turn = (turn == X) ? O : X) {
         game.dropPiece(BOARD_COLS - 1);  // a valid grid loaction
     }
 
     // Attempts to drop a piece into a full collumn.
     Piece piece = game.dropPiece(BOARD_COLS - 1);
+    turn = (turn == X) ? O : X;
     ASSERT_EQ(piece, Blank);
+
+    piece = game.dropPiece(0);
+    ASSERT_EQ(piece, turn);
 }
 
 

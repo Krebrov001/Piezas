@@ -256,6 +256,50 @@ TEST(PiezasTest, pieceAt_Invalid_8)
 }
 
 
+TEST(PiezasTest, pieceAt_Invalid_9)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the column way
+    // out of bounds to the negative.
+    Piezas game;
+
+    Piece piece = game.pieceAt(1, -50);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, pieceAt_Invalid_10)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the column way
+    // out of bounds to the positive.
+    Piezas game;
+
+    Piece piece = game.pieceAt(1, BOARD_COLS + 50);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, pieceAt_Invalid_11)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the row way
+    // out of bounds to the negative.
+    Piezas game;
+
+    Piece piece = game.pieceAt(-50, 1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, pieceAt_Invalid_12)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the row way
+    // out of bounds to the positive.
+    Piezas game;
+
+    Piece piece = game.pieceAt(BOARD_ROWS + 50, 1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
 TEST(PiezasTest, first_dropPiece_succeeds)
 {
     // This test checks if after you drop a piece into an empty collumn,

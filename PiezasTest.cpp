@@ -387,7 +387,7 @@ TEST(PiezasTest, dropPiece_fill_whole_collumn)
     Piece actual_piece = Blank;
     Piece theoretical_piece = X;
 
-    for (int row = 0; row < BOARD_ROWS; ++row, theoretical_piece = (turn == X) ? O : X) {
+    for (int row = 0; row < BOARD_ROWS; ++row, theoretical_piece = (theoretical_piece == X) ? O : X) {
         actual_piece = game.pieceAt(row, BOARD_COLS - 1);  // a valid grid loaction
         ASSERT_EQ(actual_piece, theoretical_piece);
     }

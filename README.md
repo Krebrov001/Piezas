@@ -1,5 +1,9 @@
 # Piezas
 
+[![Build Status](https://travis-ci.org/Krebrov001/Piezas.svg?branch=master)](https://travis-ci.org/Krebrov001/Piezas)
+
+[![Coverage Status](https://coveralls.io/repos/github/Krebrov001/Piezas/badge.svg?branch=master)](https://coveralls.io/github/Krebrov001/Piezas?branch=master)
+
 ## Associated Enumerated Types
 `Piece` has four possible values: `X`,`O`,`Invalid`, and `Blank`
 

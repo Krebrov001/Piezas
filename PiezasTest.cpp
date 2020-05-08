@@ -441,6 +441,16 @@ TEST(PiezasTest, dropPiece_Invalid_5)
 }
 
 
+TEST(PiezasTest, gameState_empty_board)
+{
+    // This test checks if Piezas::gameState() correctly deals with an empty board (no pieces).
+    Piezas game;
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, Invalid);
+}
+
+
 TEST(PiezasTest, gameState_Blank_edges)
 {
     // This test checks if Piezas::gameState() correctly deals with blank edges.

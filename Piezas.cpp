@@ -1,5 +1,6 @@
 #include "Piezas.h"
 #include <vector>
+#include <cstddef>
 
 /** CLASS Piezas
  * Class for representing a Piezas vertical board, which is roughly based
@@ -135,5 +136,122 @@ Piece Piezas::pieceAt(int row, int column)
 **/
 Piece Piezas::gameState()
 {
-    return Blank;
+    // These variables hold the maximum number of continuous squares for each player in the whole board.
+    std::size_t O_counter_max = 0;
+    std::size_t X_counter_max = 0;
+
+    // These variables hold the current number of continuous squares for each player in the whole board.
+    std::size_t O_counter = 0;
+    std::size_t X_counter = 0;
+
+    // These variables record if the current cell is within a continuous sequence of X's or O's.
+    bool O_sequence = false;
+    bool X_sequence = false;
+
+    // First scan the rows.
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
+            // Check for any Blank squares only in the first round, which touches all the squares.
+            if (board[row][col] == Blank)
+                return Invalid;
+
+            // The start of an O sequence.
+            if (!O_sequence && board[row][col] == O) {
+                O_sequence = true;
+                O_counter = 1;
+            // The end of an O sequence.
+            } else if (O_sequence && board[row][col] != O) {
+                O_sequence = false;
+                if (O_counter > O_counter_max)
+                    O_counter_max = O_counter;
+                O_counter = 0;
+            // In the middle of an O sequence.
+            } else if (O_sequence && board[row][col] == O) {
+                ++O_counter;
+            }
+
+            // The start of an X sequence.
+            if (!X_sequence && board[row][col] == X) {
+                X_sequence = true;
+                X_counter = 1;
+            // The end of an X sequence.
+            } else if (X_sequence && board[row][col] != X) {
+                X_sequence = false;
+                if (X_counter > X_counter_max)
+                    X_counter_max = X_counter;
+                X_counter = 0;
+            // In the middle of an X sequence.
+            } else if (X_sequence && board[row][col] == X) {
+                ++X_counter;
+            }
+        }
+
+        // The end of an O sequence.
+        O_sequence = false;
+        if (O_counter > O_counter_max)
+            O_counter_max = O_counter;
+        O_counter = 0;
+
+        // The end of an X sequence.
+        X_sequence = false;
+        if (X_counter > X_counter_max)
+            X_counter_max = X_counter;
+        X_counter = 0;
+    }
+
+    // Second scan the columns.
+    for (int col = 0; col < BOARD_COLS; ++col) {
+        for (int row = 0; row < BOARD_ROWS; ++row) {
+            // The start of an O sequence.
+            if (!O_sequence && board[row][col] == O) {
+                O_sequence = true;
+                O_counter = 1;
+            // The end of an O sequence.
+            } else if (O_sequence && board[row][col] != O) {
+                O_sequence = false;
+                if (O_counter > O_counter_max)
+                    O_counter_max = O_counter;
+                O_counter = 0;
+            // In the middle of an O sequence.
+            } else if (O_sequence && board[row][col] == O) {
+                ++O_counter;
+            }
+
+            // The start of an X sequence.
+            if (!X_sequence && board[row][col] == X) {
+                X_sequence = true;
+                X_counter = 1;
+            // The end of an X sequence.
+            } else if (X_sequence && board[row][col] != X) {
+                X_sequence = false;
+                if (X_counter > X_counter_max)
+                    X_counter_max = X_counter;
+                X_counter = 0;
+            // In the middle of an X sequence.
+            } else if (X_sequence && board[row][col] == X) {
+                ++X_counter;
+            }
+        }
+
+        // The end of an O sequence.
+        O_sequence = false;
+        if (O_counter > O_counter_max)
+            O_counter_max = O_counter;
+        O_counter = 0;
+
+        // The end of an X sequence.
+        X_sequence = false;
+        if (X_counter > X_counter_max)
+            X_counter_max = X_counter;
+        X_counter = 0;
+    }
+
+    // Third compare the maximum counters to see who won.
+    if (O_counter_max == X_counter_max) {
+        return Blank;
+    } else if (O_counter_max > X_counter_max) {
+        return O;
+    } else if (O_counter_max < X_counter_max) {
+        return X;
+    }
 }

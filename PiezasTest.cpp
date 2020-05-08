@@ -607,3 +607,28 @@ TEST(PiezasTest, gameState_win_column)
     Piece winner = game.gameState();
     ASSERT_EQ(winner, X);
 }
+
+
+TEST(PiezasTest, gameState_win_tie_breaker)
+{
+    // This test checks if Piezas::gameState() correctly deals with win that is a tie breaker.
+    // There are three sequences of consecutive sqares with a length 3.
+    // There is only one sequence of consecutive squares with a length 4, which is the tie breaker.
+    Piezas game;
+
+    game.dropPiece(1);  // drop X into [0][1]
+    game.dropPiece(1);  // drop O into [1][1]
+    game.dropPiece(2);  // drop X into [0][2]
+    game.dropPiece(2);  // drop O into [1][2]
+    game.dropPiece(3);  // drop X into [0][3]
+    game.dropPiece(3);  // drop O into [1][3]
+    game.dropPiece(3);  // drop X into [2][3]
+    game.dropPiece(0);  // drop O into [0][0]
+    game.dropPiece(2);  // drop X into [2][2]
+    game.dropPiece(0);  // drop O into [1][0]
+    game.dropPiece(1);  // drop X into [2][1]
+    game.dropPiece(0);  // drop O into [2][0]
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, O);
+}

@@ -373,3 +373,22 @@ TEST(PiezasTest, second_dropPiece_goes_above)
     piece = game.pieceAt(1, 2);
     ASSERT_EQ(piece, O);
 }
+
+
+TEST(PiezasTest, dropPiece_fill_whole_collumn)
+{
+    // This test checks if we are able to successfully fill the whole column using dropPiece().
+    Piezas game;
+
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        game.dropPiece(BOARD_COLS - 1);  // a valid grid loaction
+    }
+
+    Piece actual_piece = Blank;
+    Piece theoretical_piece = X;
+
+    for (int row = 0; row < BOARD_ROWS; ++row, theoretical_piece = (turn == X) ? O : X) {
+        actual_piece = game.pieceAt(row, BOARD_COLS - 1);  // a valid grid loaction
+        ASSERT_EQ(actual_piece, theoretical_piece);
+    }
+}

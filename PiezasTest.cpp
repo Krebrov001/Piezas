@@ -561,3 +561,26 @@ TEST(PiezasTest, gameState_tie_4)
     Piece winner = game.gameState();
     ASSERT_EQ(winner, Blank);
 }
+
+
+TEST(PiezasTest, gameState_win_row)
+{
+    // This test checks if Piezas::gameState() correctly deals with win in the row.
+    Piezas game;
+
+    game.dropPiece(0);  // drop X into [0][0]
+    game.dropPiece(0);  // drop O into [1][0]
+    game.dropPiece(1);  // drop X into [0][1]
+    game.dropPiece(1);  // drop O into [1][1]
+    game.dropPiece(0);  // drop X into [2][0]
+    game.dropPiece(2);  // drop O into [0][2]
+    game.dropPiece(3);  // drop X into [0][3]
+    game.dropPiece(1);  // drop O into [2][1]
+    game.dropPiece(3);  // drop X into [1][3]
+    game.dropPiece(2);  // drop O into [1][2]
+    game.dropPiece(2);  // drop X into [2][2]
+    game.dropPiece(3);  // drop O into [2][3]
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, O);
+}

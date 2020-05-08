@@ -14,7 +14,6 @@ class PiezasTest : public ::testing::Test
 		virtual void TearDown(){} //clean up after each test, (before destructor)
 };
 
-#define const const
 
 TEST(PiezasTest, sanityCheck)
 {
@@ -22,24 +21,78 @@ TEST(PiezasTest, sanityCheck)
 }
 
 
-TEST(PiezasTest, test_constructor)
+TEST(PiezasTest, test_constructor_1)
 {
-    const int num_rows = 3;
-    const int num_cols = 4;
-
+    // This test checks if the constructor sets up the memory for the map correctly.
     Piezas game;
 
     // The constructor sets an empty board, which means that all the spaces have to be blank.
     // They cannot contain any garbage values.
     // This for loop is only one of the few places where we need to violate the one assert rule.
-    for (int row = 0; row < num_rows; ++row) {
-        for (int col = 0; col < num_cols; ++col) {
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
             Piece piece = game.pieceAt(row, col);
             ASSERT_EQ(piece, Blank);
         }
     }
+}
+
+
+TEST(PiezasTest, test_constructor_2)
+{
+    // This test checks if the constructor sets X as the first player.
+    Piezas game;
 
     // When I drop the piece, it should be piece X.
     Piece piece = game.dropPiece(0);
     ASSERT_EQ(piece, X);
+}
+
+
+TEST(PiezasTest, test_reset_empty)
+{
+    // This test checks if Piezas::reset() clears the memory correctly,
+    // having an already empty board.
+    Piezas game;
+    game.reset();
+
+    // reset should make all the pieces blank again
+    // This for loop is only one of the few places where we need to violate the one assert rule.
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
+            Piece piece = game.pieceAt(row, col);
+            ASSERT_EQ(piece, Blank);
+        }
+    }
+}
+
+
+TEST(PiezasTest, test_reset_partial)
+{
+    // This test checks if Piezas::reset() clears the memory correctly,
+    // having a partially occupied board.
+    Piezas game;
+
+    // Add pieces to various collumns.
+    // game::reset() needs to clear
+    // a column with 3 pieces
+    // a column with 2 pieces
+    // a column with 1 pieces
+    // a column with 0 pieces
+    game.dropPiece(0);
+    game.dropPiece(0);
+    game.dropPiece(0);
+    game.dropPiece(2);
+    game.dropPiece(2);
+    game.dropPiece(3);
+    game.reset();
+
+    // reset should make all the pieces blank again
+    // This for loop is only one of the few places where we need to violate the one assert rule.
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
+            Piece piece = game.pieceAt(row, col);
+            ASSERT_EQ(piece, Blank);
+        }
+    }
 }

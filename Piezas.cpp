@@ -16,8 +16,6 @@
  * dropped in column 2 should take [1,2].
 **/
 
-static const int num_rows = 3;
-static const int num_cols = 4;
 
 /**
  * Constructor sets an empty board (default 3 rows, 4 columns) and
@@ -26,14 +24,14 @@ static const int num_cols = 4;
 Piezas::Piezas()
 {
     // set default 3 rows, 4 columns
-    board.resize(num_rows);
-    for (int row = 0; row < num_rows; ++row) {
-        board[row].resize(num_cols);
+    board.resize(BOARD_ROWS);
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        board[row].resize(BOARD_COLS);
     }
 
     // set an empty board
-    for (int row = 0; row < num_rows; ++row) {
-        for (int col = 0; col < num_cols; ++col) {
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
             board[row][col] = Blank;
         }
     }
@@ -49,8 +47,8 @@ Piezas::Piezas()
 void Piezas::reset()
 {
     // set an empty board
-    for (int row = 0; row < num_rows; ++row) {
-        for (int col = 0; col < num_cols; ++col) {
+    for (int row = 0; row < BOARD_ROWS; ++row) {
+        for (int col = 0; col < BOARD_COLS; ++col) {
             board[row][col] = Blank;
         }
     }
@@ -69,15 +67,15 @@ Piece Piezas::dropPiece(int column)
     Piece piece = Blank;
 
     // Out of bounds coordinates
-    if (column < 0 || column >= num_cols) {
+    if (column < 0 || column >= BOARD_COLS) {
         piece = Invalid;
     // Inside bounds coordinates
     } else {
         bool found_location = false;
-        int row = 2;
+        int row = BOARD_ROWS - 1;
         // Because of the flipped orientation, when you drop the pieces,
         // they rise up to the top.
-        for (row = 2; row >= 0; --row) {
+        for (row = BOARD_ROWS - 1; row >= 0; --row) {
             // If current space is occupied
             if (board[row][column] != Blank) {
                 found_location = false;
@@ -113,8 +111,8 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
-    const bool row_invalid = row < 0 || row >= num_rows;
-    const bool col_invalid = column < 0 || column >= num_cols;
+    const bool row_invalid = row < 0 || row >= BOARD_ROWS;
+    const bool col_invalid = column < 0 || column >= BOARD_COLS;
 
     if (row_invalid || col_invalid) {
         return Invalid;
@@ -124,6 +122,7 @@ Piece Piezas::pieceAt(int row, int column)
         return board[row][column];
     }
 }
+
 
 /**
  * Returns which Piece has won, if there is a winner, Invalid if the game

@@ -216,7 +216,7 @@ TEST(PiezasTest, first_dropPiece_succeeds)
 {
     // This test checks if after you drop a piece into an empty collumn,
     // that piece falls down to the bottom of the column and that the memory is indeed modified.
-    git Piezas game;
+    Piezas game;
 
     game.dropPiece(1);
 

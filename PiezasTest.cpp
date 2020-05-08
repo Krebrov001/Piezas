@@ -122,3 +122,47 @@ TEST(PiezasTest, test_reset_full)
         }
     }
 }
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_1)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the column
+    // out of bounds to the negative.
+    Piezas game;
+
+    Piece piece = game.pieceAt(1, -1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_2)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the column
+    // out of bounds to the positive.
+    Piezas game;
+
+    Piece piece = game.pieceAt(1, BOARD_COLS);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_3)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the row
+    // out of bounds to the negative.
+    Piezas game;
+
+    Piece piece = game.pieceAt(-1, 1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_4)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having the row
+    // out of bounds to the positive.
+    Piezas game;
+
+    Piece piece = game.pieceAt(BOARD_ROWS, 1);
+    ASSERT_EQ(piece, Invalid);
+}

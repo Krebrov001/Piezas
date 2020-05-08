@@ -662,3 +662,32 @@ TEST(PiezasTest, gameState_win_iterative_improvement)
     Piece winner = game.gameState();
     ASSERT_EQ(winner, O);
 }
+
+
+TEST(PiezasTest, dropPiece_full_collumn_modified_gameState)
+{
+    // This test checks Piezas::dropPiece() if the player drops a piece into an already full column,
+    // they should lose their turn. If the player loses their turn, then you will get the correct
+    // result of O winning. If the player doesn't lost their turn, then you will get the incorrect
+    // result of X winning.
+    Piezas game;
+
+    game.dropPiece(0);  // drop X into [0][0]   drop X into [0][0]
+    game.dropPiece(0);  // drop O into [1][0]   drop O into [1][0]
+    game.dropPiece(3);  // drop X into [0][3]   drop X into [0][3]
+    game.dropPiece(0);  // drop O into [2][0]   drop O into [2][0]
+    game.dropPiece(0);  // drop X into Blank    drop X into Blank
+    game.dropPiece(1);  // drop O into [0][1]   drop X into [0][1]
+    game.dropPiece(1);  // drop X into [1][1]   drop O into [1][1]
+    game.dropPiece(1);  // drop O into [2][1]   drop X into [2][1]
+    game.dropPiece(1);  // drop X into Blank    drop O into Blank
+    game.dropPiece(3);  // drop O into [1][3]   drop O into [1][3]
+    game.dropPiece(2);  // drop X into [0][2]   drop X into [0][2]
+    game.dropPiece(3);  // drop O into [2][3]   drop O into [2][3]
+    game.dropPiece(2);  // drop X into [1][2]   drop X into [1][2]
+    game.dropPiece(2);  // drop O into [2][2]   drop O into [2][2]
+                        // O wins               X wins
+
+    Piece winner = game.gameState();
+    ASSERT_EQ(winner, O);
+}

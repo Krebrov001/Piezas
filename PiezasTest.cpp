@@ -166,3 +166,47 @@ TEST(PiezasTest, test_pieceAt_Invalid_4)
     Piece piece = game.pieceAt(BOARD_ROWS, 1);
     ASSERT_EQ(piece, Invalid);
 }
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_5)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
+    // the row out of bounds to the negative AND the column out of bounds to the negative
+    Piezas game;
+
+    Piece piece = game.pieceAt(-1, -1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_6)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
+    // the row out of bounds to the negative AND the column out of bounds to the positive
+    Piezas game;
+
+    Piece piece = game.pieceAt(-1, BOARD_COLS);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_7)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
+    // the row out of bounds to the positive AND the column out of bounds to the negative
+    Piezas game;
+
+    Piece piece = game.pieceAt(BOARD_ROWS, -1);
+    ASSERT_EQ(piece, Invalid);
+}
+
+
+TEST(PiezasTest, test_pieceAt_Invalid_7)
+{
+    // This test checks if Piezas::pieceAt() returns Invalid upon having a corenr case:
+    // the row out of bounds to the positive AND the column out of bounds to the positive
+    Piezas game;
+
+    Piece piece = game.pieceAt(BOARD_ROWS, BOARD_COLS);
+    ASSERT_EQ(piece, Invalid);
+}

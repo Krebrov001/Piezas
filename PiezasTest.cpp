@@ -419,3 +419,23 @@ TEST(PiezasTest, dropPiece_Blank_2)
         ASSERT_EQ(actual_piece, theoretical_piece);
     }
 }
+
+
+TEST(PiezasTest, dropPiece_Invalid_5)
+{
+    // This test checks if a user wanted to drop a piece into an invalid column,
+    // it should return Invalid and that player loses their turn.
+    Piezas game;
+
+    Piece turn = X, returned = Blank;
+
+    game.dropPiece(1);
+    turn = (turn == X) ? O : X;
+
+    returned = game.dropPiece(BOARD_COLS + 2);
+    turn = (turn == X) ? O : X;
+    ASSERT_EQ(returned, Invalid);
+
+    returned = game.dropPiece(2);
+    ASSERT_EQ(returned, turn);
+}
